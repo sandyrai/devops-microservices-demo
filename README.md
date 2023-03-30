@@ -11,6 +11,13 @@ The project consists of four main components:
 3. **API Gateway**: A Spring Cloud Gateway implementation that routes requests to App1 and App2 based on path patterns.
 4. **Eureka Server**: A service discovery server that allows the microservices and API Gateway to discover and communicate with each other.
 
+### Communication
+
+- The **API Gateway** receives incoming requests and forwards them to the appropriate microservices (App1 and App2) based on path patterns.
+- **App1** and **App2** register themselves with the **Eureka Server** for service discovery.
+- The **API Gateway** also registers itself with the **Eureka Server** and queries it for the locations of App1 and App2.
+
+
 The project also incorporates the following DevOps tools and practices:
 
 - **GitHub**: Source code management and collaboration.

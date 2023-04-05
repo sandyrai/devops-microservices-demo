@@ -31,6 +31,28 @@ The project also incorporates the following DevOps tools and practices:
 1. Clone this repository to your local machine.
 2. Navigate to the individual component directories (App1, App2, API Gateway, Eureka Server) and follow the respective README files for instructions on building and running each application.
 
+### Services Overview
+- **App1** - A microservice running on port 8081 with the name "app1" and registered with the Eureka Server.
+- **App2** - A microservice running on port 8082 with the name "app2" and registered with the Eureka Server.
+- **Eureka Server** - A naming server running on port 8761, responsible for service registration and discovery.
+- **API Gateway** - A gateway service running on port 8083 with the name "api-gateway", registered with the Eureka Server, and responsible for routing incoming requests to App1 and App2.
+
+### Accessing Endpoints
+Now, let's say App1 has an endpoint `/hello`, and App2 has an endpoint `/world`. With the given API Gateway configuration, you can access these endpoints through the API Gateway by appending `/app1` or `/app2` to the path:
+
+- App1's `/hello` endpoint can be accessed at `http://localhost:8083/app1/hello`.
+- App2's `/world` endpoint can be accessed at `http://localhost:8083/app2/world`.
+
+The API Gateway will route the incoming requests to the appropriate microservices based on the path predicates defined in the configuration:
+
+- Requests with paths starting with `/app1/` will be routed to App1 (http://localhost:8081).
+- Requests with paths starting with `/app2/` will be routed to App2 (http://localhost:8082).
+
+### Eureka Server Registration
+All four services (App1, App2, Eureka Server, and API Gateway) are registered with the Eureka Server. This enables them to discover each other if necessary, and it also allows you to implement load balancing if you have multiple instances of any of the services running.
+
+In this setup, client applications can send requests to the API Gateway, which will route the requests to the appropriate microservices (App1 or App2). The client applications don't need to know the specific addresses of the microservices, as the API Gateway handles the routing based on the path predicates.
+
 ## Contributing
 
 Please follow the standard GitHub workflow for submitting pull requests to contribute to this project. Make sure to collaborate and communicate with other team members regularly, sharing updates and adjusting the plan as needed.

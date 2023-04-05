@@ -31,7 +31,7 @@ The project also incorporates the following DevOps tools and practices:
 1. Clone this repository to your local machine.
 2. Navigate to the individual component directories (App1, App2, API Gateway, Eureka Server) and follow the respective README files for instructions on building and running each application.
 
-### Services Overview
+## Services Overview
 - **App1** - A microservice running on port 8081 with the name "app1" and registered with the Eureka Server.
 - **App2** - A microservice running on port 8082 with the name "app2" and registered with the Eureka Server.
 - **Eureka Server** - A naming server running on port 8761, responsible for service registration and discovery.

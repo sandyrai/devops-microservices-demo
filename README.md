@@ -53,6 +53,18 @@ All four services (App1, App2, Eureka Server, and API Gateway) are registered wi
 
 In this setup, client applications can send requests to the API Gateway, which will route the requests to the appropriate microservices (App1 or App2). The client applications don't need to know the specific addresses of the microservices, as the API Gateway handles the routing based on the path predicates.
 
+## DevOps Pipeline Overview
+
+1. **Source Code Management**: Code is stored in GitHub repositories.
+2. **Containerization**: Dockerfiles define how applications are packaged into Docker containers.
+3. **Docker Registry**: Docker images are pushed to Docker Hub or Amazon Elastic Container Registry (ECR).
+4. **Continuous Integration (CI)**: Jenkins automates building, testing, and packaging applications.
+5. **Continuous Deployment (CD)**: Kubernetes deploys applications in a production-like environment on AWS.
+6. **CI/CD Integration**: Jenkins triggers deployment after successful builds and tests.
+7. **Monitoring**: Implement a monitoring solution for applications and the Kubernetes cluster.
+8. **Logging**: Configure a centralized logging system to aggregate logs from applications and the Kubernetes cluster.
+
+
 ## Contributing
 
 Please follow the standard GitHub workflow for submitting pull requests to contribute to this project. Make sure to collaborate and communicate with other team members regularly, sharing updates and adjusting the plan as needed.

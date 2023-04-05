@@ -15,16 +15,8 @@ import org.springframework.web.client.RestTemplate;
 public class HomeController {
 
     public static final String CIRCUIT_BREAKER = "breaker";
-    private RestTemplate restTemplate;
+    RestTemplate restTemplate = new RestTemplate();
 
-    private CircuitBreaker circuitBreaker;
-
-
-    @Autowired
-    public HomeController(CircuitBreakerRegistry circuitBreakerRegistry) {
-        this.restTemplate = new RestTemplate();
-        this.circuitBreaker = circuitBreakerRegistry.circuitBreaker("app2CircuitBreaker");
-    }
 
     @GetMapping("/hello")
     public String hello() {
@@ -34,7 +26,7 @@ public class HomeController {
 
     @GetMapping("/call-app2")
     @io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker(name = CIRCUIT_BREAKER,fallbackMethod= "FallBackMessage")
-    public String callApp2() {
+    public ResponseEntity<String> callApp2() {
 
         String fooResourceUrl
                 = "http://localhost:8082/hello";
@@ -42,11 +34,11 @@ public class HomeController {
                 = restTemplate.getForEntity(fooResourceUrl , String.class);
         //Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
 
-        return "app1 called";
+        return response;
     }
-    public String FallBackMessage(Exception e){
+    public ResponseEntity<String> FallBackMessage(Exception e){
 
-        return "App2 is currently unavailable. Please try again later.";
+        return  ResponseEntity.ok("App2 is currently unavailable. Please try again later.");
     }
 
 

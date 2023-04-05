@@ -6,7 +6,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 
 @SpringBootApplication
-
 @EnableDiscoveryClient
 
 public class App2Application {

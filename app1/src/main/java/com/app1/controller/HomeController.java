@@ -19,7 +19,9 @@ import org.springframework.web.client.RestClientException;
 public class HomeController {
 
     private RestTemplate restTemplate;
+
     private CircuitBreaker circuitBreaker;
+
 
     @Autowired
     public HomeController(CircuitBreakerRegistry circuitBreakerRegistry) {

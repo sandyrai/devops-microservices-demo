@@ -1,6 +1,6 @@
 # DevOps Microservices Demo
 
-This repository contains a proof-of-concept (PoC) project demonstrating the implementation of a microservices architecture using Spring Boot, along with the integration of various DevOps tools and practices.
+This repository contains a proof-of-concept (PoC) project demonstrating the implementation of a microservices architecture using SpringBoot, along with the integration of various DevOps tools and practices.
 
 ## Project Overview
 

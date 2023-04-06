@@ -15,7 +15,7 @@ The project consists of four main components:
 
 - The **API Gateway** receives incoming requests and forwards them to the appropriate microservices (App1 and App2) based on path patterns.
 - **App1** and **App2** register themselves with the **Eureka Server** for service discovery.
-- The **API Gateway** also registers itself with the **Eureka Server** and queries it for the locations of App1 and App2.
+- The **API Gateways** also registers itself with the **Eureka Server** and queries it for the locations of App1 and App2.
 
 
 The project also incorporates the following DevOps tools and practices:

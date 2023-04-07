@@ -69,11 +69,14 @@ In this setup, client applications can send requests to the API Gateway, which w
 
 Sample docker file :
 
+```Dockerfile
 FROM openjdk:17-jdk-slim
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
 EXPOSE 8081
 ENTRYPOINT ["java", "-jar", "/app.jar"]
+```
+
 
 The `Dockerfile` in this repository is used to build a Docker container for the project. It starts from the `openjdk:17-jdk-slim` base image and copies the compiled JAR file into the container. The container exposes port `8081` and runs the JAR file using the command `java -jar /app.jar`.
 

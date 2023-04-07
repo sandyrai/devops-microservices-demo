@@ -96,6 +96,38 @@ Note: Make sure to update the `ARG JAR_FILE` line in the `Dockerfile` to match t
 
 For more information on how to use Docker, see the [Docker documentation](https://docs.docker.com/). 
 
+## Docker Networking for Microservices
+
+When deploying microservices using Docker containers, it is crucial to set up proper network communication between the containers. In this case, we have app1, app2, Eureka server, and API gateway containers that need to communicate with each other.
+
+To set up the network configuration for these containers, follow these steps:
+
+1. Create a Docker network:
+    ```docker network create my-network```
+   This command creates a new network named `my-network`.
+
+2. Run the Eureka server container with the `--network my-network` flag and a custom hostname:
+   ```docker run --network my-network --name eurekaServerContainer --hostname eureka-server -p 8761:8761 -it <eureka-server-image> -d```
+    Replace `<eureka-server-image>` with the Docker image for your Eureka server.
+
+3. Update the `application.properties` files of app1 and app2 to use the custom hostname for the Eureka server:
+   eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
+   Rebuild the images for app1 and app2 after updating the `application.properties` files.
+
+4. Run app1 and app2 containers with the `--network my-network` flag:
+   docker run --network my-network --name app1Container -it <app1-image> -d
+   docker run --network my-network --name app2Container -it <app2-image> -d
+   
+   Replace `<app1-image>` and `<app2-image>` with the Docker images for app1 and app2, respectively.
+
+5. Run the API gateway container with the `--network my-network` flag:
+   docker run --network my-network --name apigatewayContainer -p 8083:8083 -it <apigateway-image> -d
+   
+   Replace `<apigateway-image>` with the Docker image for your API gateway.
+   Now, the containers are connected to the same network (`my-network`), and they can communicate with each other using their respective hostnames and ports.
+
+For more information on Docker networking, see the [Docker networking documentation](https://docs.docker.com/network/).
+ 
 
 ## Contributing
 

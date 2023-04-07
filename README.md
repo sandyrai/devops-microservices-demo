@@ -65,6 +65,27 @@ In this setup, client applications can send requests to the API Gateway, which w
 8. **Logging**: Configure a centralized logging system to aggregate logs from applications and the Kubernetes cluster.
 
 
+## Dockerfile
+
+The `Dockerfile` in this repository is used to build a Docker container for the project. It starts from the `openjdk:17-jdk-slim` base image and copies the compiled JAR file into the container. The container exposes port `8081` and runs the JAR file using the command `java -jar /app.jar`.
+
+To build and push the Docker image to Docker Hub, follow these steps:
+1. Make sure you have an account on Docker Hub.
+2. Open a terminal window and navigate to the root directory of the project.
+3. Log in to Docker Hub by running the following command:
+   docker login
+4. Build the Docker image by running the following command:
+   docker build -t <docker-hub-username>/<image-name>:<tag> 
+   Replace `<docker-hub-username>` with your Docker Hub username, `<image-name>` with a name for your Docker image, and `<tag>` with a version or tag for your Docker image.
+5. Push the Docker image to Docker Hub by running the following command:
+   docker push <docker-hub-username>/<image-name>:<tag>
+6. After the image has been pushed to Docker Hub, you can deploy the container to your environment of choice.
+
+Note: Make sure to update the `ARG JAR_FILE` line in the `Dockerfile` to match the name of your compiled JAR file. 
+
+For more information on how to use Docker, see the [Docker documentation](https://docs.docker.com/). 
+
+
 ## Contributing
 
 Please follow the standard GitHub workflow for submitting pull requests to contribute to this project. Make sure to collaborate and communicate with other team members regularly, sharing updates and adjusting the plan as needed.

@@ -2,6 +2,7 @@ package com.example.app2.controller;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,10 @@ import org.springframework.web.client.RestTemplate;
 public class App2Controller {
     public static final String CIRCUIT_BREAKER = "breaker";
     RestTemplate restTemplate = new RestTemplate();
+
+    @Value("${app1.url}")
+    private String app1Hostname;
+
 
     @GetMapping("/hello")
     public String hello(){
@@ -24,12 +29,10 @@ public class App2Controller {
     public ResponseEntity<String> callApp2() {
 
         String fooResourceUrl
-                = "http://localhost:8081/hello";
+                = app1Hostname + "/hello";
         ResponseEntity<String> response
                 = restTemplate.getForEntity(fooResourceUrl , String.class);
         //Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
-
-
         return response;
     }
     public ResponseEntity<String> FallBackMessage(Exception e){

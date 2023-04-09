@@ -14,7 +14,7 @@ public class App2Controller {
     public static final String CIRCUIT_BREAKER = "breaker";
     RestTemplate restTemplate = new RestTemplate();
 
-    @Value("${app1.url}")
+    @Value("${app1.hostname}")
     private String app1Hostname;
 
 
@@ -30,6 +30,10 @@ public class App2Controller {
 
         String fooResourceUrl
                 = app1Hostname + "/hello";
+
+        System.out.println("Calling App1 at URL: " + fooResourceUrl);
+
+
         ResponseEntity<String> response
                 = restTemplate.getForEntity(fooResourceUrl , String.class);
         //Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);

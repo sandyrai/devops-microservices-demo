@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+  eurekaserver:
+    image: skumar97/eurekaserver:v1
+    container_name: eurekaserver
+    networks:
+      - my-network
+
+    ports:
+      - "8761:8761"
+
+  apigateway:
+    image: skumar97/apigateway:v1
+    container_name: apigateway
+    networks:
+      - my-network
+    depends_on:
+      - eurekaserver
+    ports:
+      - "8083:8083"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eurekaserver:8761/eureka
+
+  app1:
+    image: skumar97/app1:v1
+    container_name: app1
+    networks:
+      - my-network
+    depends_on:
+      - apigateway
+    ports:
+      - "8081:8081"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eurekaserver:8761/eureka
+      - APP2_HOSTNAME=http://app2:8082
+
+  app2:
+    image: skumar97/app2:v1
+    container_name: app2
+    networks:
+      - my-network
+    depends_on:
+      - apigateway
+    ports:
+      - "8082:8082"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eurekaserver:8761/eureka
+      - APP1_HOSTNAME=http://app1:8081
+
+networks:
+  my-network:
+    driver: bridge

@@ -32,7 +32,7 @@ public class HomeController {
         String fooResourceUrl
                 = app2Hostname + "/hello";
 
-           System.out.println("fooResourceUrl : "+fooResourceUrl);
+        System.out.println("Calling App2 at URL: " + fooResourceUrl);
 
         ResponseEntity<String> response
                 = restTemplate.getForEntity(fooResourceUrl , String.class);

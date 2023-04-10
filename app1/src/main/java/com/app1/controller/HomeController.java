@@ -21,7 +21,8 @@ public class HomeController {
 
     @GetMapping("/hello")
     public String hello(){
-        return "this is message from app1";
+        return "this is message from app1 ";
+
     }
 
 

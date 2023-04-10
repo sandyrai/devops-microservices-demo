@@ -2,7 +2,10 @@ version: "3.9"
 
 services:
   jenkins:
-    image: jenkins/jenkins:lts
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: custom-jenkins:lts
     container_name: jenkins
     ports:
       - "8080:8080"
@@ -19,7 +22,6 @@ services:
     container_name: eurekaserver
     networks:
       - my-network
-
     ports:
       - "8761:8761"
 
@@ -74,6 +76,6 @@ services:
 networks:
   my-network:
     driver: bridge
-    
+
 volumes:
   jenkins_home:

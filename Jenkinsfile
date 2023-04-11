@@ -8,10 +8,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                sh "pwd" // Display the current working directory
-                sh "ls -la" // List the contents of the directory
+              
                 checkout scm
-                sh "git status" // Check the Git status
+            }
+        }
+
+        stage('Build Maven projects') {
+            steps {
+                sh 'mvn clean install -DskipTests'
             }
         }
 

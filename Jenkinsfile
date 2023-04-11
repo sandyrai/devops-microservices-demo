@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-user/your-repo.git'
+                git 'https://github.com/sandyrai/devops-microservices-demo'
             }
         }
         stage('Update Docker image tags') {

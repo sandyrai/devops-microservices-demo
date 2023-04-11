@@ -1,38 +1,41 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKER_CREDS = credentials('docker-hub-credentials')
-    }
-
     stages {
         stage('Checkout') {
             steps {
-              
                 checkout scm
             }
         }
-
         stage('Build Maven projects') {
             steps {
-                sh 'mvn clean install -DskipTests'
+                dir('api-gateway') {
+                    sh 'mvn clean install -DskipTests'
+                }
+                dir('app1') {
+                    sh 'mvn clean install -DskipTests'
+                }
+                dir('app2') {
+                    sh 'mvn clean install -DskipTests'
+                }
+                dir('eureka-server') {
+                    sh 'mvn clean install -DskipTests'
+                }
             }
         }
-
         stage('Build Docker images') {
             steps {
-                script {
-                    DOCKER_CREDS_USR = sh(script: 'echo $DOCKER_CREDS_USR', returnStdout: true).trim()
-                    DOCKER_CREDS_PSW = sh(script: 'echo $DOCKER_CREDS_PSW', returnStdout: true).trim()
-                }
-                sh "docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}"
-                sh "docker-compose build"
+                sh 'docker-compose build'
             }
         }
-
         stage('Push Docker images') {
             steps {
-                sh "docker-compose push"
+                withCredentials([usernamePassword(credentialsId: 'docker_hub_login', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    withEnv(["PATH+DOCKER=/usr/local/bin"]) {
+                        sh 'docker login -u $USERNAME -p $PASSWORD'
+                        sh 'docker-compose push'
+                    }
+                }
             }
         }
     }

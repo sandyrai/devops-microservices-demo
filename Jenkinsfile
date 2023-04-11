@@ -5,17 +5,15 @@ pipeline {
         DOCKER_CREDS = credentials('docker-hub-credentials')
     }
 
-
-        
+    stages {
         stage('Checkout') {
-    steps {
-       
-        sh "pwd" // Display the current working directory
-        sh "ls -la" // List the contents of the directory
-        sh "git status" // Check the Git status
-         checkout scm
-    }
-}
+            steps {
+                sh "pwd" // Display the current working directory
+                sh "ls -la" // List the contents of the directory
+                checkout scm
+                sh "git status" // Check the Git status
+            }
+        }
 
         stage('Build Docker images') {
             steps {

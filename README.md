@@ -128,6 +128,34 @@ To set up the network configuration for these containers, follow these steps:
 
 For more information on Docker networking, see the [Docker networking documentation](https://docs.docker.com/network/).
  
+## Continuous Integration with Jenkins
+
+We have set up a Continuous Integration (CI) pipeline using Jenkins to automate the process of building, testing (if applicable), and pushing Docker images for our microservices. The Jenkins pipeline does the following:
+
+1. Pulls the source code from GitHub whenever there is a new commit.
+2. Builds the Docker images for our applications using the Dockerfiles.
+3. Pushes the Docker images to Docker Hub.
+
+### Custom Jenkins Docker Image
+
+We have created a custom Jenkins Docker image that includes Java 17, Docker CLI, Docker Compose, and Maven. The Dockerfile for the custom Jenkins image can be found in the repository.
+
+### Jenkins Pipeline
+
+The Jenkinsfile in the repository defines the pipeline stages and steps, such as checking out the source code, updating Docker image tags, building Docker images, logging in to Docker Hub, and pushing Docker images.
+
+To set up this CI pipeline, follow these steps:
+
+1. Build the custom Jenkins Docker image using the provided Dockerfile.
+2. Run a Jenkins container using the built image.
+3. Install the required plugins in Jenkins (Git, Pipeline, and Docker Pipeline).
+4. Create a new Jenkins Pipeline job.
+5. In the Pipeline section, choose "Pipeline script from SCM" and provide the repository URL and the path to the Jenkinsfile.
+6. Save the job configuration and trigger a new build.
+
+The Jenkins pipeline will now automatically build, test (if applicable), and push Docker images to Docker Hub whenever there is a new commit in the GitHub repository.
+
+For more information on setting up and configuring Jenkins, refer to the [official Jenkins documentation](https://www.jenkins.io/doc/).
 
 ## Contributing
 

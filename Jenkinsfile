@@ -33,7 +33,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     withEnv(["PATH+DOCKER=/usr/local/bin"]) {
                         sh 'docker login -u $USERNAME -p $PASSWORD'
-                        sh 'docker-compose push'
+                        sh 'docker-compose push --quiet'
                     }
                 }
             }

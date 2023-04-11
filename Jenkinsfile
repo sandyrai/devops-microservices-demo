@@ -1,25 +1,18 @@
 pipeline {
     agent any
-
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                git 'https://github.com/your-user/your-repo.git'
             }
         }
-        stage('Build Maven projects') {
+        stage('Update Docker image tags') {
             steps {
-                dir('api-gateway') {
-                    sh 'mvn clean install -DskipTests'
-                }
-                dir('app1') {
-                    sh 'mvn clean install -DskipTests'
-                }
-                dir('app2') {
-                    sh 'mvn clean install -DskipTests'
-                }
-                dir('eureka-server') {
-                    sh 'mvn clean install -DskipTests'
+                script {
+                    def newTag = "v${env.BUILD_NUMBER}"
+                    def composeFile = readFile('docker-compose.yml')
+                    composeFile = composeFile.replaceAll(/(image: skumar97\/\w+:)v\d+/, "\$1${newTag}")
+                    writeFile(file: 'docker-compose.yml', text: composeFile)
                 }
             }
         }
@@ -28,15 +21,16 @@ pipeline {
                 sh 'docker-compose build'
             }
         }
+        stage('Login to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                }
+            }
+        }
         stage('Push Docker images') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    withEnv(["PATH+DOCKER=/usr/local/bin"]) {
-                        sh 'docker login -u $USERNAME -p $PASSWORD'
-                        sh 'pwd'
-                        sh 'docker-compose push'
-                    }
-                }
+                sh 'docker-compose push'
             }
         }
     }

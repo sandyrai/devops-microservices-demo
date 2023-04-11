@@ -9,10 +9,11 @@ pipeline {
         
         stage('Checkout') {
     steps {
-        checkout scm
+       
         sh "pwd" // Display the current working directory
         sh "ls -la" // List the contents of the directory
         sh "git status" // Check the Git status
+         checkout scm
     }
 }
 

@@ -13,6 +13,10 @@ services:
     volumes:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
+    user: root
+    command: >
+      bash -c "chown root:docker /var/run/docker.sock &&
+               /sbin/tini -- /usr/local/bin/jenkins.sh"
 
   eurekaserver:
     build:

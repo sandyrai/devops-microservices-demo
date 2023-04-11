@@ -15,4 +15,8 @@ RUN apt-get update && \
     groupadd docker && \
     usermod -aG docker jenkins
 
+RUN curl -fsSL https://github.com/krallin/tini/releases/download/v0.19.0/tini-static -o /sbin/tini && chmod +x /sbin/tini
+
+ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]
+
 USER jenkins

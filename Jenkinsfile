@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Push Docker images') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker_hub_login', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     withEnv(["PATH+DOCKER=/usr/local/bin"]) {
                         sh 'docker login -u $USERNAME -p $PASSWORD'
                         sh 'docker-compose push'

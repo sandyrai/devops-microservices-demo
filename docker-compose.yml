@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: my-jenkins-docker-image
+    image: skumar97/my-jenkins-docker-image:v4
     container_name: jenkins
     ports:
       - "8080:8080"
@@ -22,7 +22,7 @@ services:
     build:
       context: ./eureka-server
       dockerfile: Dockerfile
-    image: skumar97/eurekaserver:v3
+    image: skumar97/eurekaserver:v4
     container_name: eurekaserver
     networks:
       - my-network
@@ -33,7 +33,7 @@ services:
     build:
       context: ./api-gateway
       dockerfile: Dockerfile
-    image: skumar97/apigateway:v3
+    image: skumar97/apigateway:v4
     container_name: apigateway
     networks:
       - my-network
@@ -49,7 +49,7 @@ services:
     build:
       context: ./app1
       dockerfile: Dockerfile
-    image: skumar97/app1:v3
+    image: skumar97/app1:v4
     container_name: app1
     networks:
       - my-network
@@ -65,7 +65,7 @@ services:
     build:
       context: ./app2
       dockerfile: Dockerfile
-    image: skumar97/app2:v3
+    image: skumar97/app2:v4
     container_name: app2
     networks:
       - my-network

@@ -4,7 +4,7 @@ This repository contains a proof-of-concept (PoC) project demonstrating the impl
 
 ## Project Overview
 
-The project consists of four main components:
+The project consists of four main components::
 
 1. **App1**: A Spring Boot microservice that performs CRUD operations.
 2. **App2**: Another Spring Boot microservice that performs CRUD operations.
@@ -18,7 +18,7 @@ The project consists of four main components:
 - The **API Gateways** also registers itself with the **Eureka Server** and queries it for the locations of App1 and App2.
 
 
-The project also incorporates the following DevOps tools and practices:
+The project also incorporates the following DevOps tools and practices::
 
 - **GitHub**: Source code management and collaboration.
 - **Docker**: Containerization of the applications.

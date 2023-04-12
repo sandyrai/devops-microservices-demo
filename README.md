@@ -2,6 +2,45 @@
 
 This repository contains a proof-of-concept (PoC) project demonstrating the implementation of a microservices architecture using SpringBoot, along with the integration of various DevOps tools and practices.
 
+## Step-up Guide
+
+This guide will walk you through running our POC with four Spring Boot applications: `app1`, `app2`, `api-gateway`, and `eureka-server`. There are two ways to run these applications: without Docker and with Docker.
+
+### Option 1: Running the Applications without Docker
+
+1. Ensure that you have Java 17 and Maven installed on your machine.
+2. Clone the repository:
+   git clone https://github.com/sandyrai/devops-microservices-demo.git
+
+3. Import the project into your favorite IDE (such as STS or IntelliJ).
+
+4. Build and run each application separately:
+
+- For `app1` and `app2`:
+  ```
+  mvn clean install
+  mvn spring-boot:run
+  ```
+- For `api-gateway` and `eureka-server`:
+  ```
+  mvn clean install
+  mvn spring-boot:run
+  ```
+Alternatively, you can run the applications directly from your IDE by right-clicking the main class of each application and selecting "Run".
+
+### Option 2: Running the Applications with Docker
+
+1. Ensure that you have Docker and Docker Compose installed on your machine.
+
+2. Clone the repository:
+   git clone https://github.com/sandyrai/devops-microservices-demo.git
+
+3. Build the Docker images for each application:
+
+4. Run the Docker containers:
+docker-compose up
+
+
 ## Project Overview
 
 The project consists of four main components::

@@ -3,9 +3,10 @@
 This repository contains a proof-of-concept (PoC) project demonstrating the implementation of a microservices architecture using SpringBoot, along with the integration of various DevOps tools and practices.
 
 
-| ## Step-by-Step Guide |
+## Step-by-Step Guide 
  
-```This guide will walk you through running our POC with four Spring Boot applications: `app1`, `app2`, `api-gateway`, and `eureka-server`. There are two ways to run these applications: without Docker and with Docker.
+```
+This guide will walk you through running our POC with four Spring Boot applications: `app1`, `app2`, `api-gateway`, and `eureka-server`. There are two ways to run these applications: without Docker and with Docker.
 
 ### Option 1: Running the Applications without Docker
 
@@ -45,7 +46,6 @@ Alternatively, you can run the applications directly from your IDE by right-clic
 
 4. Run the Docker containers:
    docker-compose up   
-   
 ```
 
 ## Project Overview
